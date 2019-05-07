@@ -1,0 +1,110 @@
+{
+    "type": "object",
+    "properties": {
+        "resourceGroupName": {
+            "required": true,
+            "type": "string"
+        },
+        "managedInstanceName": {
+            "required": true,
+            "type": "string"
+        },
+        "keyName": {
+            "required": true,
+            "type": "string"
+        },
+        "subscriptionId": {
+            "required": true,
+            "type": "string"
+        },
+        "requestBody": {
+            "allOf": [
+                {
+                    "allOf": [
+                        {
+                            "description": "ARM resource.",
+                            "properties": {
+                                "id": {
+                                    "description": "Resource ID.",
+                                    "readOnly": true,
+                                    "type": "string"
+                                },
+                                "name": {
+                                    "description": "Resource name.",
+                                    "readOnly": true,
+                                    "type": "string"
+                                },
+                                "type": {
+                                    "description": "Resource type.",
+                                    "readOnly": true,
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object",
+                            "x-ms-azure-resource": true
+                        }
+                    ],
+                    "description": "ARM proxy resource.",
+                    "properties": {},
+                    "type": "object"
+                }
+            ],
+            "description": "A managed instance key.",
+            "properties": {
+                "kind": {
+                    "description": "Kind of encryption protector. This is metadata used for the Azure portal experience.",
+                    "readOnly": true,
+                    "type": "string"
+                },
+                "properties": {
+                    "description": "Resource properties.",
+                    "x-ms-client-flatten": true,
+                    "properties": {
+                        "creationDate": {
+                            "description": "The key creation date.",
+                            "format": "date-time",
+                            "readOnly": true,
+                            "type": "string"
+                        },
+                        "serverKeyType": {
+                            "description": "The key type like 'ServiceManaged', 'AzureKeyVault'.",
+                            "enum": [
+                                "ServiceManaged",
+                                "AzureKeyVault"
+                            ],
+                            "type": "string",
+                            "x-ms-enum": {
+                                "modelAsString": true,
+                                "name": "ServerKeyType"
+                            },
+                            "x-ms-mutability": [
+                                "create"
+                            ]
+                        },
+                        "thumbprint": {
+                            "description": "Thumbprint of the key.",
+                            "readOnly": true,
+                            "type": "string"
+                        },
+                        "uri": {
+                            "description": "The URI of the key. If the ServerKeyType is AzureKeyVault, then the URI is required.",
+                            "type": "string",
+                            "x-ms-mutability": [
+                                "create"
+                            ]
+                        }
+                    },
+                    "required": [
+                        "serverKeyType"
+                    ],
+                    "type": "object"
+                }
+            },
+            "type": "object"
+        },
+        "api_version": {
+            "required": true,
+            "type": "string"
+        }
+    }
+}
